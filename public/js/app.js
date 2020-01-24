@@ -73772,12 +73772,14 @@ function (_Component) {
       serviceTitle: '',
       serviceBody: '',
       serviceImage: '',
+      serviceBackground: '',
       selectedFile: null,
       imagePreviewUrl: null,
       data: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
-    _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this)); // this.handleImagenChange = this.handleImagenChange.bind(this);
+    _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
+    _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this)); // this.handleImagenChange = this.handleImagenChange.bind(this);
 
     _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -73797,6 +73799,13 @@ function (_Component) {
     value: function handleBodyChange(e) {
       this.setState({
         serviceBody: e.target.value
+      });
+    }
+  }, {
+    key: "handleBackgroundChange",
+    value: function handleBackgroundChange(e) {
+      this.setState({
+        serviceBackground: e.target.value
       });
     } // handleImagenChange(e){
     //   this.setState({
@@ -73882,6 +73891,7 @@ function (_Component) {
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/add', {
                 title: this.state.serviceTitle,
                 body: this.state.serviceBody,
+                background: this.state.serviceBackground,
                 image: this.state.serviceImage
               }).then(function (response) {
                 console.log(response.data);
@@ -73939,6 +73949,15 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         className: "form-control col-md-6",
         onChange: this.handleBodyChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Background:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleBackgroundChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "App"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
@@ -74058,12 +74077,12 @@ function (_Component) {
         className: "btn btn-primary col-md-3 m-2 btn-sm mr-2"
       }, "Add service")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-hover"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Background"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         width: "200px"
       }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.services !== null ? this.state.services.map(function (service) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: service.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.background), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: "../../images/" + service.image,
           alt: "icon",
           width: "200"
@@ -74187,12 +74206,14 @@ function (_Component) {
       serviceTitle: '',
       serviceBody: '',
       serviceImage: '',
+      serviceBackground: '',
       selectedFile: null,
       imagePreviewUrl: null,
       data: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
-    _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this)); // this.handleImagenChange = this.handleImagenChange.bind(this);
+    _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
+    _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this)); // this.handleImagenChange = this.handleImagenChange.bind(this);
 
     _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -74208,7 +74229,8 @@ function (_Component) {
         _this2.setState({
           serviceTitle: response.data.title,
           serviceBody: response.data.body,
-          serviceImage: response.data.image
+          serviceImage: response.data.image,
+          serviceBackground: response.data.background
         });
       })["catch"](function (error) {
         console.log(error);
@@ -74226,6 +74248,13 @@ function (_Component) {
     value: function handleBodyChange(e) {
       this.setState({
         serviceBody: e.target.value
+      });
+    }
+  }, {
+    key: "handleBackgroundChange",
+    value: function handleBackgroundChange(e) {
+      this.setState({
+        serviceBackground: e.target.value
       });
     } // handleImagenChange(e){
     //   this.setState({
@@ -74305,6 +74334,7 @@ function (_Component) {
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.put("/api/services/".concat(this.props.match.params.id, "}"), {
                 title: this.state.serviceTitle,
                 body: this.state.serviceBody,
+                background: this.state.serviceBackground,
                 image: this.state.serviceImage
               }).then(function (response) {
                 _this4.setState({
@@ -74373,6 +74403,16 @@ function (_Component) {
         className: "form-control col-md-6",
         onChange: this.handleBodyChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Background:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceBackground,
+        className: "form-control col-md-6",
+        onChange: this.handleBackgroundChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "App"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "file",
@@ -74412,8 +74452,8 @@ function (_Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\MiloPcs\Documents\back\dutylist\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\MiloPcs\Documents\back\dutylist\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\MiloPcs\Documents\newadmin\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\MiloPcs\Documents\newadmin\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

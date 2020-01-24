@@ -47,6 +47,7 @@ class DisplayService extends Component {
                 <td>ID</td>
                 <td>Service Title</td>
                 <td>Service Body</td>
+                <td>Service Background</td>
                 <td>Service Image</td>
                 <td width="200px">Actions</td>
             </tr>
@@ -58,6 +59,7 @@ class DisplayService extends Component {
                 <td>{service.id}</td>
                 <td>{service.title}</td>
                 <td>{service.body}</td>
+                <td>{service.background}</td>
                 <td><img src={"../../images/" + service.image} alt="icon" width="200" /></td>
                 <td>
                   <button  className="btn btn-primary" onClick={() => this.handleDelete(service.id)}>delete</button>

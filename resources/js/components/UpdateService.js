@@ -6,11 +6,12 @@ import ReactDOM from 'react-dom';
 class UpdateService extends Component {
   constructor(props){
     super(props);
-    this.state = {serviceTitle: '', serviceBody: '', serviceImage: '', selectedFile: null, imagePreviewUrl: null, data:'' };
+    this.state = {serviceTitle: '', serviceBody: '', serviceImage: '', serviceBackground: '', selectedFile: null, imagePreviewUrl: null, data:'' };
 
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleBodyChange = this.handleBodyChange.bind(this);
+    this.handleBackgroundChange = this.handleBackgroundChange.bind(this);
     // this.handleImagenChange = this.handleImagenChange.bind(this);
     this.fileChangedHandler = this.fileChangedHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +26,7 @@ class UpdateService extends Component {
         serviceTitle: response.data.title,
         serviceBody: response.data.body,
         serviceImage: response.data.image,
+        serviceBackground: response.data.background,
        });
     })
     .catch(function (error) {
@@ -40,6 +42,11 @@ class UpdateService extends Component {
   handleBodyChange(e){
     this.setState({
       serviceBody: e.target.value
+    })
+  }
+  handleBackgroundChange(e){
+    this.setState({
+      serviceBackground: e.target.value
     })
   }
   // handleImagenChange(e){
@@ -109,6 +116,7 @@ class UpdateService extends Component {
                   {
                     title: this.state.serviceTitle,
                     body: this.state.serviceBody,
+                    background: this.state.serviceBackground,
                     image: this.state.serviceImage
                   }).then( response => {
                     this.setState({
@@ -146,6 +154,14 @@ class UpdateService extends Component {
                 <div className="form-group">
                   <label>Service Body:</label>
                   <textarea value={this.state.serviceBody} className="form-control col-md-6" onChange={this.handleBodyChange}></textarea>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Service Background:</label>
+                  <textarea value={this.state.serviceBackground} className="form-control col-md-6" onChange={this.handleBackgroundChange}></textarea>
                 </div>
               </div>
             </div>

@@ -68,7 +68,8 @@ class ServiceController extends Controller
         $service = new Service([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'image' => $request->get('image')
+            'image' => $request->get('image'),
+            'background' => $request->get('background')
           ]);
           $service->save();
           return $service;

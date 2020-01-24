@@ -6,11 +6,12 @@ import ReactDOM from 'react-dom';
 class CreateService extends Component {
   constructor(props){
     super(props);
-    this.state = {serviceTitle: '', serviceBody: '', serviceImage: '', selectedFile: null, imagePreviewUrl: null, data:'' };
+    this.state = {serviceTitle: '', serviceBody: '', serviceImage: '', serviceBackground: '', selectedFile: null, imagePreviewUrl: null, data:'' };
 
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
      this.handleBodyChange = this.handleBodyChange.bind(this);
+     this.handleBackgroundChange = this.handleBackgroundChange.bind(this);
     // this.handleImagenChange = this.handleImagenChange.bind(this);
     this.fileChangedHandler = this.fileChangedHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,6 +27,11 @@ class CreateService extends Component {
   handleBodyChange(e){
     this.setState({
       serviceBody: e.target.value
+    })
+  }
+  handleBackgroundChange(e){
+    this.setState({
+      serviceBackground: e.target.value
     })
   }
   // handleImagenChange(e){
@@ -95,6 +101,7 @@ class CreateService extends Component {
                   {
                     title:this.state.serviceTitle,
                     body:this.state.serviceBody,
+                    background:this.state.serviceBackground,
                     image:this.state.serviceImage
                   })
                   .then( response => {
@@ -131,6 +138,14 @@ class CreateService extends Component {
                 <div className="form-group">
                   <label>Service Body:</label>
                   <textarea className="form-control col-md-6" onChange={this.handleBodyChange}></textarea>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Service Background:</label>
+                  <textarea className="form-control col-md-6" onChange={this.handleBackgroundChange}></textarea>
                 </div>
               </div>
             </div>
