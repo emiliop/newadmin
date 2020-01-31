@@ -23,3 +23,7 @@ Route::post('services', 'ServiceController@saveImg');
 Route::post('services/add','ServiceController@add');
 Route::put('services/{id}','ServiceController@update');
 Route::delete('services/{id}','ServiceController@delete');
+
+Route::get('forms','FormController@index');
+Route::get('forms/{id}','FormController@show');
+Route::post('forms/add','FormController@add');

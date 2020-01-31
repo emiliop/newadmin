@@ -74032,7 +74032,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DisplayService).call(this, props));
     _this.state = {
       value: '',
-      services: []
+      services: [],
+      forms: []
     };
     return _this;
   }
@@ -74046,6 +74047,15 @@ function (_Component) {
         _this2.setState({
           services: response.data
         });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/forms').then(function (response) {
+        _this2.setState({
+          forms: response.data
+        });
+
+        console.log(_this2.state.forms);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -74070,14 +74080,14 @@ function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Services"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Proyects"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/create",
         className: "btn btn-primary col-md-3 m-2 btn-sm mr-2"
       }, "Add service")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-hover"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Background"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Background"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         width: "200px"
       }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.services !== null ? this.state.services.map(function (service) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
@@ -74095,6 +74105,12 @@ function (_Component) {
           to: "/edit/" + service.id,
           className: "btn btn-secondary ml-2"
         }, "edit")));
+      }) : null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Comments"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-hover"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Form Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Form Mail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Form Phone"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Form Comment"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.forms !== null ? this.state.forms.map(function (form) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: form.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, form.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, form.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, form.mail), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, form.phone), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, form.comment));
       }) : null)));
     }
   }]);

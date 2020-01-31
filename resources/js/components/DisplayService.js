@@ -6,12 +6,21 @@ import axios from 'axios';
 class DisplayService extends Component {
   constructor(props) {
        super(props);
-       this.state = {value: '', services: []};
+       this.state = {value: '', services: [], forms:[]};
      }
      componentDidMount(){
        axios.get('/api/services')
        .then(response => {
          this.setState({ services: response.data });
+       })
+       .catch(function (error) {
+         console.log(error);
+       })
+
+       axios.get('/api/forms')
+       .then(response => {
+         this.setState({ forms: response.data });
+         console.log(this.state.forms);
        })
        .catch(function (error) {
          console.log(error);
@@ -33,7 +42,7 @@ class DisplayService extends Component {
   render(){
     return (
       <div>
-        <h1>Services</h1>
+        <h1>Proyects</h1>
 
 
         <div className="row">
@@ -45,10 +54,10 @@ class DisplayService extends Component {
             <thead>
             <tr>
                 <td>ID</td>
-                <td>Service Title</td>
-                <td>Service Body</td>
-                <td>Service Background</td>
-                <td>Service Image</td>
+                <td>Proyect Title</td>
+                <td>Proyect Body</td>
+                <td>Proyect Background</td>
+                <td>Proyect Image</td>
                 <td width="200px">Actions</td>
             </tr>
             </thead>
@@ -73,6 +82,38 @@ class DisplayService extends Component {
               
             </tbody>
         </table>
+
+        <h1>Comments</h1>
+
+        <table className="table table-hover">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Form Name</td>
+                <td>Form Mail</td>
+                <td>Form Phone</td>
+                <td>Form Comment</td>
+            </tr>
+            </thead>
+            <tbody>
+              {
+                this.state.forms !==null ? this.state.forms.map( form => (
+                  <tr key={form.id}>
+                <td>{form.id}</td>
+                <td>{form.name}</td>
+                <td>{form.mail}</td>
+                <td>{form.phone}</td>
+                <td>{form.comment}</td>
+                
+           
+            </tr>
+                )) 
+                :null
+              }
+              
+            </tbody>
+        </table>
+
     </div>
     )
   }
