@@ -53,11 +53,16 @@ class DisplayService extends Component {
         <table className="table table-hover">
             <thead>
             <tr>
-                <td>ID</td>
-                <td>Proyect Title</td>
-                <td>Proyect Body</td>
-                <td>Proyect Background</td>
-                <td>Proyect Image</td>
+                <td>Title</td>
+                <td>Background</td>
+                <td>Product</td>
+                <td>Client</td>
+                <td>Service</td>
+                <td>Service 2</td>
+                <td>Service 3</td>
+                <td>Description</td>
+                <td>Duration</td>
+                <td>Image</td>
                 <td width="200px">Actions</td>
             </tr>
             </thead>
@@ -65,11 +70,16 @@ class DisplayService extends Component {
               {
                 this.state.services !==null ? this.state.services.map( service => (
                   <tr key={service.id}>
-                <td>{service.id}</td>
                 <td>{service.title}</td>
-                <td>{service.body}</td>
                 <td>{service.background}</td>
-                <td><img src={"../../images/" + service.image} alt="icon" width="200" /></td>
+                <td>{service.product}</td>
+                <td>{service.client}</td>
+                <td>{service.service1}</td>
+                <td>{service.service2}</td>
+                <td>{service.service3}</td>
+                <td>{service.description}</td>
+                <td>{service.duration}</td>
+                <td><img src={"../../images/" + service.image} alt="icon" width="100" /></td>
                 <td>
                   <button  className="btn btn-primary" onClick={() => this.handleDelete(service.id)}>delete</button>
                   <Link to={"/edit/"+service.id} className="btn btn-secondary ml-2">edit</Link>

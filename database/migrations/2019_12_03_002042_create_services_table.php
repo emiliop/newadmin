@@ -19,13 +19,18 @@ class CreateServicesTable extends Migration
             $table->text('body');
             $table->string('background');
             $table->text('image');
+            $table->text('midimage');
+            $table->string('product');
+            $table->string('client');
+            $table->string('service1');
+            $table->string('service2');
+            $table->string('service3');
+            $table->text('description');
+            $table->string('duration');
+            $table->string('date');
             $table->timestamps();
         });
 
-        Schema::create('sessions', function ($table) {
-            $table->string('id')->unique();
-            $table->string('image')->nullable();
-        });
     }
 
     

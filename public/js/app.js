@@ -73772,18 +73772,60 @@ function (_Component) {
       serviceTitle: '',
       serviceBody: '',
       serviceImage: '',
+      serviceMidImage: '',
+      serviceGalleryImage1: '',
+      serviceGalleryImage2: '',
+      serviceGalleryImage3: '',
+      serviceGalleryImage4: '',
+      serviceGalleryImage5: '',
       serviceBackground: '',
+      serviceProduct: '',
+      serviceClient: '',
+      serviceService1: '',
+      serviceService2: '',
+      serviceService3: '',
+      serviceDescription: '',
+      serviceDuration: '',
       selectedFile: null,
+      imageFile: null,
+      galleryFile1: null,
+      galleryFile2: null,
+      galleryFile3: null,
+      galleryFile4: null,
+      galleryFile5: null,
       imagePreviewUrl: null,
-      data: ''
+      imageMidPreviewUrl: null,
+      imageGalleryPreviewUrl1: null,
+      imageGalleryPreviewUrl2: null,
+      imageGalleryPreviewUrl3: null,
+      imageGalleryPreviewUrl4: null,
+      imageGalleryPreviewUrl5: null,
+      data: '',
+      dataImage: '',
+      dataGallery1: '',
+      dataGallery2: '',
+      dataGallery3: '',
+      dataGallery4: '',
+      dataGallery5: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
     _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
-    _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this)); // this.handleImagenChange = this.handleImagenChange.bind(this);
-
+    _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this));
+    _this.handleProductChange = _this.handleProductChange.bind(_assertThisInitialized(_this));
+    _this.handleClientChange = _this.handleClientChange.bind(_assertThisInitialized(_this));
+    _this.handleService1Change = _this.handleService1Change.bind(_assertThisInitialized(_this));
+    _this.handleService2Change = _this.handleService2Change.bind(_assertThisInitialized(_this));
+    _this.handleService3Change = _this.handleService3Change.bind(_assertThisInitialized(_this));
+    _this.handleDescriptionChange = _this.handleDescriptionChange.bind(_assertThisInitialized(_this));
+    _this.handleDurationChange = _this.handleDurationChange.bind(_assertThisInitialized(_this));
     _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
+    _this.imageChangedHandler = _this.imageChangedHandler.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler1 = _this.galleryChangedHandler1.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler2 = _this.galleryChangedHandler2.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler3 = _this.galleryChangedHandler3.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler4 = _this.galleryChangedHandler4.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler5 = _this.galleryChangedHandler5.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.submit = _this.submit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -73807,12 +73849,56 @@ function (_Component) {
       this.setState({
         serviceBackground: e.target.value
       });
-    } // handleImagenChange(e){
-    //   this.setState({
-    //     serviceImage: e.target.value
-    //   })
-    // }
-
+    }
+  }, {
+    key: "handleProductChange",
+    value: function handleProductChange(e) {
+      this.setState({
+        serviceProduct: e.target.value
+      });
+    }
+  }, {
+    key: "handleClientChange",
+    value: function handleClientChange(e) {
+      this.setState({
+        serviceClient: e.target.value
+      });
+    }
+  }, {
+    key: "handleService1Change",
+    value: function handleService1Change(e) {
+      this.setState({
+        serviceService1: e.target.value
+      });
+    }
+  }, {
+    key: "handleService2Change",
+    value: function handleService2Change(e) {
+      this.setState({
+        serviceService2: e.target.value
+      });
+    }
+  }, {
+    key: "handleService3Change",
+    value: function handleService3Change(e) {
+      this.setState({
+        serviceService3: e.target.value
+      });
+    }
+  }, {
+    key: "handleDescriptionChange",
+    value: function handleDescriptionChange(e) {
+      this.setState({
+        serviceDescription: e.target.value
+      });
+    }
+  }, {
+    key: "handleDurationChange",
+    value: function handleDurationChange(e) {
+      this.setState({
+        serviceDuration: e.target.value
+      });
+    }
   }, {
     key: "fileChangedHandler",
     value: function fileChangedHandler(e) {
@@ -73830,39 +73916,156 @@ function (_Component) {
       };
 
       reader.readAsDataURL(event.target.files[0]);
-      var data2 = new FormData();
-      data2.append('image', event.target.files[0], event.target.files[0].name);
+      var datafile = new FormData();
+      datafile.append('image', event.target.files[0], event.target.files[0].name);
       this.setState({
-        data: data2
+        data: datafile
       });
     }
   }, {
-    key: "submit",
-    value: function submit(e) {
+    key: "imageChangedHandler",
+    value: function imageChangedHandler(e) {
       var _this3 = this;
 
-      var settings = {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      };
-      e.preventDefault();
-      axios.post('api/services', this.state.data, settings).then(function (response) {
-        _this3.setState({
-          serviceImage: response.data
-        });
+      this.setState({
+        imageFile: event.target.files[0]
+      });
+      var readermid = new FileReader();
 
-        console.log(response.data);
-      })["catch"](function (err) {
-        return console.log(err);
+      readermid.onloadend = function () {
+        _this3.setState({
+          imageMidPreviewUrl: readermid.result
+        });
+      };
+
+      readermid.readAsDataURL(event.target.files[0]);
+      var datamid = new FormData();
+      datamid.append('midimage', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataImage: datamid
+      });
+    }
+  }, {
+    key: "galleryChangedHandler1",
+    value: function galleryChangedHandler1(e) {
+      var _this4 = this;
+
+      this.setState({
+        galleryFile1: event.target.files[0]
+      });
+      var reader1 = new FileReader();
+
+      reader1.onloadend = function () {
+        _this4.setState({
+          imageGalleryPreviewUrl1: reader1.result
+        });
+      };
+
+      reader1.readAsDataURL(event.target.files[0]);
+      var data1 = new FormData();
+      data1.append('gallery1', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery1: data1
+      });
+    }
+  }, {
+    key: "galleryChangedHandler2",
+    value: function galleryChangedHandler2(e) {
+      var _this5 = this;
+
+      this.setState({
+        galleryFile2: event.target.files[0]
+      });
+      var reader2 = new FileReader();
+
+      reader2.onloadend = function () {
+        _this5.setState({
+          imageGalleryPreviewUrl2: reader2.result
+        });
+      };
+
+      reader2.readAsDataURL(event.target.files[0]);
+      var data2 = new FormData();
+      data2.append('gallery2', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery2: data2
+      });
+    }
+  }, {
+    key: "galleryChangedHandler3",
+    value: function galleryChangedHandler3(e) {
+      var _this6 = this;
+
+      this.setState({
+        galleryFile3: event.target.files[0]
+      });
+      var reader3 = new FileReader();
+
+      reader3.onloadend = function () {
+        _this6.setState({
+          imageGalleryPreviewUrl3: reader3.result
+        });
+      };
+
+      reader3.readAsDataURL(event.target.files[0]);
+      var data3 = new FormData();
+      data3.append('gallery3', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery3: data3
+      });
+    }
+  }, {
+    key: "galleryChangedHandler4",
+    value: function galleryChangedHandler4(e) {
+      var _this7 = this;
+
+      this.setState({
+        galleryFile4: event.target.files[0]
+      });
+      var reader4 = new FileReader();
+
+      reader4.onloadend = function () {
+        _this7.setState({
+          imageGalleryPreviewUrl4: reader4.result
+        });
+      };
+
+      reader4.readAsDataURL(event.target.files[0]);
+      var data4 = new FormData();
+      data4.append('gallery4', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery4: data4
+      });
+    }
+  }, {
+    key: "galleryChangedHandler5",
+    value: function galleryChangedHandler5(e) {
+      var _this8 = this;
+
+      this.setState({
+        galleryFile5: event.target.files[0]
+      });
+      var reader5 = new FileReader();
+
+      reader5.onloadend = function () {
+        _this8.setState({
+          imageGalleryPreviewUrl5: reader5.result
+        });
+      };
+
+      reader5.readAsDataURL(event.target.files[0]);
+      var data5 = new FormData();
+      data5.append('gallery5', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery5: data5
       });
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this4 = this;
+      var _this9 = this;
 
-      var settings, ddwqd, wqewqee;
+      var settings, bannerImage, midImage, galleryImage1, galleryImage2, galleryImage3, galleryImage4, galleryImage5, serviceData;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function handleSubmit$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -73875,36 +74078,112 @@ function (_Component) {
               e.preventDefault();
               _context.next = 4;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services', this.state.data, settings).then(function (res) {
-                _this4.setState({
+                _this9.setState({
                   serviceImage: res.data
                 });
-
-                console.log(res.data);
               })["catch"](function (err) {
                 return console.log(err);
               }));
 
             case 4:
-              ddwqd = _context.sent;
-              console.log(this.state.serviceImage);
-              _context.next = 8;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/add', {
-                title: this.state.serviceTitle,
-                body: this.state.serviceBody,
-                background: this.state.serviceBackground,
-                image: this.state.serviceImage
-              }).then(function (response) {
-                console.log(response.data);
-
-                _this4.props.history.push('/home');
+              bannerImage = _context.sent;
+              _context.next = 7;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/mid', this.state.dataImage, settings).then(function (respo) {
+                _this9.setState({
+                  serviceMidImage: respo.data
+                });
               })["catch"](function (err) {
                 return console.log(err);
               }));
 
-            case 8:
-              wqewqee = _context.sent;
+            case 7:
+              midImage = _context.sent;
+              _context.next = 10;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/gallery1', this.state.dataGallery1, settings).then(function (respoGallery1) {
+                _this9.setState({
+                  serviceGalleryImage1: respoGallery1.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
 
-            case 9:
+            case 10:
+              galleryImage1 = _context.sent;
+              _context.next = 13;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/gallery2', this.state.dataGallery2, settings).then(function (respoGallery2) {
+                _this9.setState({
+                  serviceGalleryImage2: respoGallery2.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 13:
+              galleryImage2 = _context.sent;
+              _context.next = 16;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/gallery3', this.state.dataGallery3, settings).then(function (respoGallery3) {
+                _this9.setState({
+                  serviceGalleryImage3: respoGallery3.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 16:
+              galleryImage3 = _context.sent;
+              _context.next = 19;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/gallery4', this.state.dataGallery4, settings).then(function (respoGallery4) {
+                _this9.setState({
+                  serviceGalleryImage4: respoGallery4.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 19:
+              galleryImage4 = _context.sent;
+              _context.next = 22;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/gallery5', this.state.dataGallery5, settings).then(function (respoGallery5) {
+                _this9.setState({
+                  serviceGalleryImage5: respoGallery5.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 22:
+              galleryImage5 = _context.sent;
+              _context.next = 25;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/add', {
+                title: this.state.serviceTitle,
+                body: this.state.serviceBody,
+                background: this.state.serviceBackground,
+                product: this.state.serviceProduct,
+                client: this.state.serviceClient,
+                service1: this.state.serviceService1,
+                service2: this.state.serviceService2,
+                service3: this.state.serviceService3,
+                description: this.state.serviceDescription,
+                duration: this.state.serviceDuration,
+                image: this.state.serviceImage,
+                midimage: this.state.serviceMidImage,
+                imagegallery1: this.state.serviceGalleryImage1,
+                imagegallery2: this.state.serviceGalleryImage2,
+                imagegallery3: this.state.serviceGalleryImage3,
+                imagegallery4: this.state.serviceGalleryImage4,
+                imagegallery5: this.state.serviceGalleryImage5
+              }).then(function (response) {
+                console.log(response.data);
+
+                _this9.props.history.push('/home');
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 25:
+              serviceData = _context.sent;
+
+            case 26:
             case "end":
               return _context.stop();
           }
@@ -73916,19 +74195,103 @@ function (_Component) {
     value: function render() {
       var $imagePreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "previewText image-container"
-      }, "Please select an Image for Preview");
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Principal Image:"), "Please select a Principal Image for Preview:", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null));
 
       if (this.state.imagePreviewUrl) {
         $imagePreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "image-container"
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Principal Image:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
           src: this.state.imagePreviewUrl,
+          alt: "icon",
+          width: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), " ");
+      }
+
+      var $imageMidPreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "previewText image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Content Image:"), "Please select an Mid content Image for Preview");
+
+      if (this.state.imageMidPreviewUrl) {
+        $imageMidPreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Content Image:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageMidPreviewUrl,
           alt: "icon",
           width: "200"
         }), " ");
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Create Service"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+      var $imageGalleryPreview1 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "previewText image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 1:"), "Please select Image 1 of Gallery for Preview");
+
+      if (this.state.imageGalleryPreviewUrl1) {
+        $imageGalleryPreview1 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 1:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl1,
+          alt: "icon",
+          width: "200"
+        }));
+      }
+
+      var $imageGalleryPreview2 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "previewText image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 2:"), "Please select Image 2 of Gallery for Preview");
+
+      if (this.state.imageGalleryPreviewUrl2) {
+        $imageGalleryPreview2 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 2:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl2,
+          alt: "icon",
+          width: "200"
+        }));
+      }
+
+      var $imageGalleryPreview3 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "previewText image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 3:"), "Please select Image 3 of Gallery for Preview");
+
+      if (this.state.imageGalleryPreviewUrl3) {
+        $imageGalleryPreview3 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 3:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl3,
+          alt: "icon",
+          width: "200"
+        }));
+      }
+
+      var $imageGalleryPreview4 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "previewText image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 4:"), "Please select Image 4 of Gallery for Preview");
+
+      if (this.state.imageGalleryPreviewUrl4) {
+        $imageGalleryPreview4 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 4:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl4,
+          alt: "icon",
+          width: "200"
+        }));
+      }
+
+      var $imageGalleryPreview5 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "previewText image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 5:"), "Please select Image 5 of Gallery for Preview");
+
+      if (this.state.imageGalleryPreviewUrl5) {
+        $imageGalleryPreview5 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 5:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl5,
+          alt: "icon",
+          width: "200"
+        }));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Create Service"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
@@ -73936,17 +74299,23 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Title:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Title:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "text",
         className: "form-control",
         onChange: this.handleTitleChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App"
+      }, $imagePreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar",
+        onChange: this.fileChangedHandler
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         className: "form-control col-md-6",
         onChange: this.handleBodyChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -73955,16 +74324,109 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Background:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Background:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         className: "form-control col-md-6",
         onChange: this.handleBackgroundChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "App"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Product:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleProductChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Client:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleClientChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleService1Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 2:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleService2Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 3:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleService3Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App2"
+      }, $imageMidPreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "file",
-        name: "avatar",
-        onChange: this.fileChangedHandler
-      }), $imagePreview), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        name: "avatar2",
+        onChange: this.imageChangedHandler
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Description:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleDescriptionChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Duration:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleDurationChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Gallery"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App3"
+      }, $imageGalleryPreview1, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar3",
+        onChange: this.galleryChangedHandler1
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App4"
+      }, $imageGalleryPreview2, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar4",
+        onChange: this.galleryChangedHandler2
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App5"
+      }, $imageGalleryPreview3, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar5",
+        onChange: this.galleryChangedHandler3
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App6"
+      }, $imageGalleryPreview4, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar6",
+        onChange: this.galleryChangedHandler4
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App7"
+      }, $imageGalleryPreview5, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar7",
+        onChange: this.galleryChangedHandler5
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         className: "btn btn-primary",
@@ -74087,15 +74549,15 @@ function (_Component) {
         className: "btn btn-primary col-md-3 m-2 btn-sm mr-2"
       }, "Add service")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-hover"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Background"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Proyect Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Background"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Product"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Client"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service 2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Service 3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Duration"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         width: "200px"
       }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.services !== null ? this.state.services.map(function (service) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: service.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.background), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.background), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.product), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.client), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.service1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.service2), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.service3), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, service.duration), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: "../../images/" + service.image,
           alt: "icon",
-          width: "200"
+          width: "100"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "btn btn-primary",
           onClick: function onClick() {
@@ -74222,16 +74684,59 @@ function (_Component) {
       serviceTitle: '',
       serviceBody: '',
       serviceImage: '',
+      serviceMidImage: '',
+      serviceGalleryImage1: '',
+      serviceGalleryImage2: '',
+      serviceGalleryImage3: '',
+      serviceGalleryImage4: '',
+      serviceGalleryImage5: '',
       serviceBackground: '',
+      serviceProduct: '',
+      serviceClient: '',
+      serviceService1: '',
+      serviceService2: '',
+      serviceService3: '',
+      serviceDescription: '',
+      serviceDuration: '',
       selectedFile: null,
+      imageFile: null,
+      galleryFile1: null,
+      galleryFile2: null,
+      galleryFile3: null,
+      galleryFile4: null,
+      galleryFile5: null,
       imagePreviewUrl: null,
-      data: ''
+      imageMidPreviewUrl: null,
+      imageGalleryPreviewUrl1: null,
+      imageGalleryPreviewUrl2: null,
+      imageGalleryPreviewUrl3: null,
+      imageGalleryPreviewUrl4: null,
+      imageGalleryPreviewUrl5: null,
+      data: '',
+      dataImage: '',
+      dataGallery1: '',
+      dataGallery2: '',
+      dataGallery3: '',
+      dataGallery4: '',
+      dataGallery5: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
     _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
-    _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this)); // this.handleImagenChange = this.handleImagenChange.bind(this);
-
+    _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this));
+    _this.handleProductChange = _this.handleProductChange.bind(_assertThisInitialized(_this));
+    _this.handleClientChange = _this.handleClientChange.bind(_assertThisInitialized(_this));
+    _this.handleService1Change = _this.handleService1Change.bind(_assertThisInitialized(_this));
+    _this.handleService2Change = _this.handleService2Change.bind(_assertThisInitialized(_this));
+    _this.handleService3Change = _this.handleService3Change.bind(_assertThisInitialized(_this));
+    _this.handleDescriptionChange = _this.handleDescriptionChange.bind(_assertThisInitialized(_this));
+    _this.handleDurationChange = _this.handleDurationChange.bind(_assertThisInitialized(_this));
     _this.fileChangedHandler = _this.fileChangedHandler.bind(_assertThisInitialized(_this));
+    _this.imageChangedHandler = _this.imageChangedHandler.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler1 = _this.galleryChangedHandler1.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler2 = _this.galleryChangedHandler2.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler3 = _this.galleryChangedHandler3.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler4 = _this.galleryChangedHandler4.bind(_assertThisInitialized(_this));
+    _this.galleryChangedHandler5 = _this.galleryChangedHandler5.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -74241,12 +74746,26 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      console.log(this.props);
       axios.get("/api/services/".concat(this.props.match.params.id)).then(function (response) {
         _this2.setState({
           serviceTitle: response.data.title,
           serviceBody: response.data.body,
           serviceImage: response.data.image,
-          serviceBackground: response.data.background
+          serviceBackground: response.data.background,
+          serviceProduct: response.data.product,
+          serviceClient: response.data.client,
+          serviceService1: response.data.service1,
+          serviceService2: response.data.service2,
+          serviceService3: response.data.service3,
+          serviceDescription: response.data.description,
+          serviceDuration: response.data.duration,
+          serviceMidImage: response.data.midimage,
+          serviceGalleryImage1: response.data.imagegallery1,
+          serviceGalleryImage2: response.data.imagegallery2,
+          serviceGalleryImage3: response.data.imagegallery3,
+          serviceGalleryImage4: response.data.imagegallery4,
+          serviceGalleryImage5: response.data.imagegallery5
         });
       })["catch"](function (error) {
         console.log(error);
@@ -74272,12 +74791,56 @@ function (_Component) {
       this.setState({
         serviceBackground: e.target.value
       });
-    } // handleImagenChange(e){
-    //   this.setState({
-    //     serviceImage: e.target.value
-    //   })
-    // }
-
+    }
+  }, {
+    key: "handleProductChange",
+    value: function handleProductChange(e) {
+      this.setState({
+        serviceProduct: e.target.value
+      });
+    }
+  }, {
+    key: "handleClientChange",
+    value: function handleClientChange(e) {
+      this.setState({
+        serviceClient: e.target.value
+      });
+    }
+  }, {
+    key: "handleService1Change",
+    value: function handleService1Change(e) {
+      this.setState({
+        serviceService1: e.target.value
+      });
+    }
+  }, {
+    key: "handleService2Change",
+    value: function handleService2Change(e) {
+      this.setState({
+        serviceService2: e.target.value
+      });
+    }
+  }, {
+    key: "handleService3Change",
+    value: function handleService3Change(e) {
+      this.setState({
+        serviceService3: e.target.value
+      });
+    }
+  }, {
+    key: "handleDescriptionChange",
+    value: function handleDescriptionChange(e) {
+      this.setState({
+        serviceDescription: e.target.value
+      });
+    }
+  }, {
+    key: "handleDurationChange",
+    value: function handleDurationChange(e) {
+      this.setState({
+        serviceDuration: e.target.value
+      });
+    }
   }, {
     key: "fileChangedHandler",
     value: function fileChangedHandler(e) {
@@ -74295,33 +74858,156 @@ function (_Component) {
       };
 
       reader.readAsDataURL(event.target.files[0]);
-      var data2 = new FormData();
-      data2.append('image', event.target.files[0], event.target.files[0].name);
+      var datafile = new FormData();
+      datafile.append('image', event.target.files[0], event.target.files[0].name);
       this.setState({
-        data: data2
+        data: datafile
       });
-    } // handleSubmit(e){
-    //   e.preventDefault();
-    //   axios.put(`/api/services/${this.props.match.params.id}}`,{
-    //     title: this.state.serviceTitle,
-    //     body: this.state.serviceBody,
-    //     image: this.state.serviceImage
-    //   }).then( response => {
-    //     this.setState({
-    //       title:'',
-    //       body:'',
-    //       image:''
-    //     })
-    //     this.props.history.push('/home');
-    //   }).catch(err=> console.log(err));
-    // }
+    }
+  }, {
+    key: "imageChangedHandler",
+    value: function imageChangedHandler(e) {
+      var _this4 = this;
 
+      this.setState({
+        imageFile: event.target.files[0]
+      });
+      var readermid = new FileReader();
+
+      readermid.onloadend = function () {
+        _this4.setState({
+          imageMidPreviewUrl: readermid.result
+        });
+      };
+
+      readermid.readAsDataURL(event.target.files[0]);
+      var datamid = new FormData();
+      datamid.append('midimage', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataImage: datamid
+      });
+    }
+  }, {
+    key: "galleryChangedHandler1",
+    value: function galleryChangedHandler1(e) {
+      var _this5 = this;
+
+      this.setState({
+        galleryFile1: event.target.files[0]
+      });
+      var reader1 = new FileReader();
+
+      reader1.onloadend = function () {
+        _this5.setState({
+          imageGalleryPreviewUrl1: reader1.result
+        });
+      };
+
+      reader1.readAsDataURL(event.target.files[0]);
+      var data1 = new FormData();
+      data1.append('gallery1', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery1: data1
+      });
+    }
+  }, {
+    key: "galleryChangedHandler2",
+    value: function galleryChangedHandler2(e) {
+      var _this6 = this;
+
+      this.setState({
+        galleryFile2: event.target.files[0]
+      });
+      var reader2 = new FileReader();
+
+      reader2.onloadend = function () {
+        _this6.setState({
+          imageGalleryPreviewUrl2: reader2.result
+        });
+      };
+
+      reader2.readAsDataURL(event.target.files[0]);
+      var data2 = new FormData();
+      data2.append('gallery2', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery2: data2
+      });
+    }
+  }, {
+    key: "galleryChangedHandler3",
+    value: function galleryChangedHandler3(e) {
+      var _this7 = this;
+
+      this.setState({
+        galleryFile3: event.target.files[0]
+      });
+      var reader3 = new FileReader();
+
+      reader3.onloadend = function () {
+        _this7.setState({
+          imageGalleryPreviewUrl3: reader3.result
+        });
+      };
+
+      reader3.readAsDataURL(event.target.files[0]);
+      var data3 = new FormData();
+      data3.append('gallery3', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery3: data3
+      });
+    }
+  }, {
+    key: "galleryChangedHandler4",
+    value: function galleryChangedHandler4(e) {
+      var _this8 = this;
+
+      this.setState({
+        galleryFile4: event.target.files[0]
+      });
+      var reader4 = new FileReader();
+
+      reader4.onloadend = function () {
+        _this8.setState({
+          imageGalleryPreviewUrl4: reader4.result
+        });
+      };
+
+      reader4.readAsDataURL(event.target.files[0]);
+      var data4 = new FormData();
+      data4.append('gallery4', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery4: data4
+      });
+    }
+  }, {
+    key: "galleryChangedHandler5",
+    value: function galleryChangedHandler5(e) {
+      var _this9 = this;
+
+      this.setState({
+        galleryFile5: event.target.files[0]
+      });
+      var reader5 = new FileReader();
+
+      reader5.onloadend = function () {
+        _this9.setState({
+          imageGalleryPreviewUrl5: reader5.result
+        });
+      };
+
+      reader5.readAsDataURL(event.target.files[0]);
+      var data5 = new FormData();
+      data5.append('gallery5', event.target.files[0], event.target.files[0].name);
+      this.setState({
+        dataGallery5: data5
+      });
+    }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this4 = this;
+      var _this10 = this;
 
-      var settings, ddwqd, wqewqee;
+      var settings, bannerImage, midImage, galleryImage1, galleryImage2, galleryImage3, galleryImage4, galleryImage5, wqewqee;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function handleSubmit$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -74334,40 +75020,130 @@ function (_Component) {
               e.preventDefault();
               _context.next = 4;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('../api/services', this.state.data, settings).then(function (res) {
-                _this4.setState({
+                _this10.setState({
                   serviceImage: res.data
                 });
-
-                console.log(res.data);
               })["catch"](function (err) {
                 return console.log(err);
               }));
 
             case 4:
-              ddwqd = _context.sent;
-              console.log(this.state.serviceImage);
-              _context.next = 8;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.put("/api/services/".concat(this.props.match.params.id, "}"), {
-                title: this.state.serviceTitle,
-                body: this.state.serviceBody,
-                background: this.state.serviceBackground,
-                image: this.state.serviceImage
-              }).then(function (response) {
-                _this4.setState({
-                  title: '',
-                  body: '',
-                  image: ''
+              bannerImage = _context.sent;
+              _context.next = 7;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('../api/services/mid', this.state.dataImage, settings).then(function (respo) {
+                _this10.setState({
+                  serviceMidImage: respo.data
                 });
-
-                _this4.props.history.push('/home');
               })["catch"](function (err) {
                 return console.log(err);
               }));
 
-            case 8:
+            case 7:
+              midImage = _context.sent;
+              _context.next = 10;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('../api/services/gallery1', this.state.dataGallery1, settings).then(function (respoGallery1) {
+                _this10.setState({
+                  serviceGalleryImage1: respoGallery1.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 10:
+              galleryImage1 = _context.sent;
+              _context.next = 13;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('../api/services/gallery2', this.state.dataGallery2, settings).then(function (respoGallery2) {
+                _this10.setState({
+                  serviceGalleryImage2: respoGallery2.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 13:
+              galleryImage2 = _context.sent;
+              _context.next = 16;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('../api/services/gallery3', this.state.dataGallery3, settings).then(function (respoGallery3) {
+                _this10.setState({
+                  serviceGalleryImage3: respoGallery3.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 16:
+              galleryImage3 = _context.sent;
+              _context.next = 19;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('../api/services/gallery4', this.state.dataGallery4, settings).then(function (respoGallery4) {
+                _this10.setState({
+                  serviceGalleryImage4: respoGallery4.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 19:
+              galleryImage4 = _context.sent;
+              _context.next = 22;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('../api/services/gallery5', this.state.dataGallery5, settings).then(function (respoGallery5) {
+                _this10.setState({
+                  serviceGalleryImage5: respoGallery5.data
+                });
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 22:
+              galleryImage5 = _context.sent;
+              _context.next = 25;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.put("/api/services/".concat(this.props.match.params.id, "}"), {
+                title: this.state.serviceTitle,
+                body: this.state.serviceBody,
+                background: this.state.serviceBackground,
+                product: this.state.serviceProduct,
+                client: this.state.serviceClient,
+                service1: this.state.serviceService1,
+                service2: this.state.serviceService2,
+                service3: this.state.serviceService3,
+                description: this.state.serviceDescription,
+                duration: this.state.serviceDuration,
+                image: this.state.serviceImage,
+                midimage: this.state.serviceMidImage,
+                imagegallery1: this.state.serviceGalleryImage1,
+                imagegallery2: this.state.serviceGalleryImage2,
+                imagegallery3: this.state.serviceGalleryImage3,
+                imagegallery4: this.state.serviceGalleryImage4,
+                imagegallery5: this.state.serviceGalleryImage5
+              }).then(function (response) {
+                _this10.setState({
+                  title: '',
+                  body: '',
+                  background: '',
+                  product: '',
+                  client: '',
+                  service1: '',
+                  service2: '',
+                  service3: '',
+                  description: '',
+                  duration: '',
+                  image: '',
+                  midimage: '',
+                  imagegallery1: '',
+                  imagegallery2: '',
+                  imagegallery3: '',
+                  imagegallery4: '',
+                  imagegallery5: ''
+                });
+
+                _this10.props.history.push('/home');
+              })["catch"](function (err) {
+                return console.log(err);
+              }));
+
+            case 25:
               wqewqee = _context.sent;
 
-            case 9:
+            case 26:
             case "end":
               return _context.stop();
           }
@@ -74379,7 +75155,7 @@ function (_Component) {
     value: function render() {
       var $imagePreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "image-container"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         src: "../../images/" + this.state.serviceImage,
         alt: "icon",
         width: "200"
@@ -74388,14 +75164,122 @@ function (_Component) {
       if (this.state.imagePreviewUrl) {
         $imagePreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "image-container"
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
           src: this.state.imagePreviewUrl,
           alt: "icon",
           width: "200"
         }), " ");
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Update Service"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+      var $imageMidPreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: "../../images/" + this.state.serviceMidImage,
+        alt: "icon",
+        width: "200"
+      }), " ");
+
+      if (this.state.imageMidPreviewUrl) {
+        $imageMidPreview = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageMidPreviewUrl,
+          alt: "icon",
+          width: "200"
+        }), " ");
+      }
+
+      var $imageGalleryPreview1 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: "../../images/" + this.state.serviceGalleryImage1,
+        alt: "icon",
+        width: "200"
+      }), " ");
+
+      if (this.state.imageGalleryPreviewUrl1) {
+        $imageGalleryPreview1 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl1,
+          alt: "icon",
+          width: "200"
+        }), " ");
+      }
+
+      var $imageGalleryPreview2 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: "../../images/" + this.state.serviceGalleryImage2,
+        alt: "icon",
+        width: "200"
+      }), " ");
+
+      if (this.state.imageGalleryPreviewUrl2) {
+        $imageGalleryPreview2 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl2,
+          alt: "icon",
+          width: "200"
+        }), " ");
+      }
+
+      var $imageGalleryPreview3 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: "../../images/" + this.state.serviceGalleryImage3,
+        alt: "icon",
+        width: "200"
+      }), " ");
+
+      if (this.state.imageGalleryPreviewUrl3) {
+        $imageGalleryPreview3 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl3,
+          alt: "icon",
+          width: "200"
+        }), " ");
+      }
+
+      var $imageGalleryPreview4 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: "../../images/" + this.state.serviceGalleryImage4,
+        alt: "icon",
+        width: "200"
+      }), " ");
+
+      if (this.state.imageGalleryPreviewUrl4) {
+        $imageGalleryPreview4 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl4,
+          alt: "icon",
+          width: "200"
+        }), " ");
+      }
+
+      var $imageGalleryPreview5 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: "../../images/" + this.state.serviceGalleryImage5,
+        alt: "icon",
+        width: "200"
+      }), " ");
+
+      if (this.state.imageGalleryPreviewUrl5) {
+        $imageGalleryPreview5 = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "image-container"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: this.state.imageGalleryPreviewUrl5,
+          alt: "icon",
+          width: "200"
+        }), " ");
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Update Service"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
@@ -74403,18 +75287,24 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Title:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Title:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         value: this.state.serviceTitle,
         type: "text",
         className: "form-control",
         onChange: this.handleTitleChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Principal Image:"), $imagePreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar",
+        onChange: this.fileChangedHandler
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         value: this.state.serviceBody,
         className: "form-control col-md-6",
         onChange: this.handleBodyChange
@@ -74424,17 +75314,117 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service Background:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Background:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         value: this.state.serviceBackground,
         className: "form-control col-md-6",
         onChange: this.handleBackgroundChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "App"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Product:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceProduct,
+        className: "form-control col-md-6",
+        onChange: this.handleProductChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Client:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceClient,
+        className: "form-control col-md-6",
+        onChange: this.handleClientChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service1:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceService1,
+        className: "form-control col-md-6",
+        onChange: this.handleService1Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 2:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceService2,
+        className: "form-control col-md-6",
+        onChange: this.handleService2Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 3:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceService3,
+        className: "form-control col-md-6",
+        onChange: this.handleService3Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App2"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Content Image:"), $imageMidPreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "file",
-        name: "avatar",
-        onChange: this.fileChangedHandler
-      }), $imagePreview), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        name: "avatar2",
+        onChange: this.imageChangedHandler
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Description:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceDescription,
+        className: "form-control col-md-6",
+        onChange: this.handleDescriptionChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Duration:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceDuration,
+        className: "form-control col-md-6",
+        onChange: this.handleDurationChange
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Gallery"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App3"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 1:"), $imageGalleryPreview1, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar3",
+        onChange: this.galleryChangedHandler1
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App4"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 2:"), $imageGalleryPreview2, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar4",
+        onChange: this.galleryChangedHandler2
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App5"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 3:"), $imageGalleryPreview3, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar5",
+        onChange: this.galleryChangedHandler3
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 4:"), $imageGalleryPreview4, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar6",
+        onChange: this.galleryChangedHandler4
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "App7"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Imagen de la Galleria 5:"), $imageGalleryPreview5, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "file",
+        name: "avatar7",
+        onChange: this.galleryChangedHandler5
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         className: "btn btn-primary",
