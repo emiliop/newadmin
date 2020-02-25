@@ -163,11 +163,13 @@ class ServiceController extends Controller
 
         // $image = image::show_image();
 
-        // dump($image);
+         dump($request);
 
         $service = new Service([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
+            'body2' => $request->get('body2'),
+            'highlighted' => $request->get('highlighted'),
             'midimage' => $request->get('midimage'),
             'image' => $request->get('image'),
             'background' => $request->get('background'),

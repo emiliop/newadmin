@@ -73771,6 +73771,8 @@ function (_Component) {
     _this.state = {
       serviceTitle: '',
       serviceBody: '',
+      serviceBody2: '',
+      serviceHighlighted: 'true',
       serviceImage: '',
       serviceMidImage: '',
       serviceGalleryImage1: '',
@@ -73781,9 +73783,9 @@ function (_Component) {
       serviceBackground: '',
       serviceProduct: '',
       serviceClient: '',
-      serviceService1: '',
-      serviceService2: '',
-      serviceService3: '',
+      serviceService1: 'Servicio Uno',
+      serviceService2: 'Servicio Uno',
+      serviceService3: 'Servicio Uno',
       serviceDescription: '',
       serviceDuration: '',
       selectedFile: null,
@@ -73809,7 +73811,9 @@ function (_Component) {
       dataGallery5: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
+    _this.handleHighlightedChange = _this.handleHighlightedChange.bind(_assertThisInitialized(_this));
     _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
+    _this.handleBody2Change = _this.handleBody2Change.bind(_assertThisInitialized(_this));
     _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this));
     _this.handleProductChange = _this.handleProductChange.bind(_assertThisInitialized(_this));
     _this.handleClientChange = _this.handleClientChange.bind(_assertThisInitialized(_this));
@@ -73837,10 +73841,24 @@ function (_Component) {
       });
     }
   }, {
+    key: "handleHighlightedChange",
+    value: function handleHighlightedChange(e) {
+      this.setState({
+        serviceHighlighted: e.target.value
+      });
+    }
+  }, {
     key: "handleBodyChange",
     value: function handleBodyChange(e) {
       this.setState({
         serviceBody: e.target.value
+      });
+    }
+  }, {
+    key: "handleBody2Change",
+    value: function handleBody2Change(e) {
+      this.setState({
+        serviceBody2: e.target.value
       });
     }
   }, {
@@ -74153,10 +74171,12 @@ function (_Component) {
 
             case 22:
               galleryImage5 = _context.sent;
-              _context.next = 25;
+              console.log(this.state);
+              _context.next = 26;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/add', {
                 title: this.state.serviceTitle,
                 body: this.state.serviceBody,
+                body2: this.state.serviceBody2,
                 background: this.state.serviceBackground,
                 product: this.state.serviceProduct,
                 client: this.state.serviceClient,
@@ -74165,6 +74185,7 @@ function (_Component) {
                 service3: this.state.serviceService3,
                 description: this.state.serviceDescription,
                 duration: this.state.serviceDuration,
+                highlighted: this.state.serviceHighlighted,
                 image: this.state.serviceImage,
                 midimage: this.state.serviceMidImage,
                 imagegallery1: this.state.serviceGalleryImage1,
@@ -74180,10 +74201,10 @@ function (_Component) {
                 return console.log(err);
               }));
 
-            case 25:
+            case 26:
               serviceData = _context.sent;
 
-            case 26:
+            case 27:
             case "end":
               return _context.stop();
           }
@@ -74315,10 +74336,14 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-        className: "form-control col-md-6",
-        onChange: this.handleBodyChange
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Es servicio destacado?"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceHighlighted,
+        onChange: this.handleHighlightedChange
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "true"
+      }, "Si"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "false"
+      }, "No")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
@@ -74351,27 +74376,54 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-        className: "form-control col-md-6",
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceService1,
         onChange: this.handleService1Change
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Uno"
+      }, "Servicio Uno"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Dos"
+      }, "Servicio Dos"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Tres"
+      }, "Servicio Tres")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 2:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-        className: "form-control col-md-6",
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 2:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceService2,
         onChange: this.handleService2Change
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Uno"
+      }, "Servicio Uno"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Dos"
+      }, "Servicio Dos"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Tres"
+      }, "Servicio Tres")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 3:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-        className: "form-control col-md-6",
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 3:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceService3,
         onChange: this.handleService3Change
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Uno"
+      }, "Servicio Uno"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Dos"
+      }, "Servicio Dos"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Tres"
+      }, "Servicio Tres")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleBodyChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "App2"
       }, $imageMidPreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
@@ -74379,6 +74431,15 @@ function (_Component) {
         name: "avatar2",
         onChange: this.imageChangedHandler
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body Second Part:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        className: "form-control col-md-6",
+        onChange: this.handleBody2Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
@@ -74683,6 +74744,8 @@ function (_Component) {
     _this.state = {
       serviceTitle: '',
       serviceBody: '',
+      serviceBody2: '',
+      serviceHighlighted: '',
       serviceImage: '',
       serviceMidImage: '',
       serviceGalleryImage1: '',
@@ -74721,7 +74784,9 @@ function (_Component) {
       dataGallery5: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
+    _this.handleHighlightedChange = _this.handleHighlightedChange.bind(_assertThisInitialized(_this));
     _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
+    _this.handleBody2Change = _this.handleBody2Change.bind(_assertThisInitialized(_this));
     _this.handleBackgroundChange = _this.handleBackgroundChange.bind(_assertThisInitialized(_this));
     _this.handleProductChange = _this.handleProductChange.bind(_assertThisInitialized(_this));
     _this.handleClientChange = _this.handleClientChange.bind(_assertThisInitialized(_this));
@@ -74751,6 +74816,8 @@ function (_Component) {
         _this2.setState({
           serviceTitle: response.data.title,
           serviceBody: response.data.body,
+          serviceBody2: response.data.body2,
+          serviceHighlighted: response.data.highlighted,
           serviceImage: response.data.image,
           serviceBackground: response.data.background,
           serviceProduct: response.data.product,
@@ -74767,6 +74834,8 @@ function (_Component) {
           serviceGalleryImage4: response.data.imagegallery4,
           serviceGalleryImage5: response.data.imagegallery5
         });
+
+        console.log(_this2.state);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -74779,10 +74848,24 @@ function (_Component) {
       });
     }
   }, {
+    key: "handleHighlightedChange",
+    value: function handleHighlightedChange(e) {
+      this.setState({
+        serviceHighlighted: e.target.value
+      });
+    }
+  }, {
     key: "handleBodyChange",
     value: function handleBodyChange(e) {
       this.setState({
         serviceBody: e.target.value
+      });
+    }
+  }, {
+    key: "handleBody2Change",
+    value: function handleBody2Change(e) {
+      this.setState({
+        serviceBody2: e.target.value
       });
     }
   }, {
@@ -75099,6 +75182,8 @@ function (_Component) {
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.put("/api/services/".concat(this.props.match.params.id, "}"), {
                 title: this.state.serviceTitle,
                 body: this.state.serviceBody,
+                body2: this.state.serviceBody2,
+                highlighted: this.state.serviceHighlighted,
                 background: this.state.serviceBackground,
                 product: this.state.serviceProduct,
                 client: this.state.serviceClient,
@@ -75118,6 +75203,8 @@ function (_Component) {
                 _this10.setState({
                   title: '',
                   body: '',
+                  body2: '',
+                  highlighted: '',
                   background: '',
                   product: '',
                   client: '',
@@ -75304,11 +75391,14 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-        value: this.state.serviceBody,
-        className: "form-control col-md-6",
-        onChange: this.handleBodyChange
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Es servicio destacado?"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceHighlighted,
+        onChange: this.handleHighlightedChange
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "true"
+      }, "Si"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "false"
+      }, "No")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
@@ -75344,30 +75434,55 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service1:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         value: this.state.serviceService1,
-        className: "form-control col-md-6",
         onChange: this.handleService1Change
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Uno"
+      }, "Servicio Uno"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Dos"
+      }, "Servicio Dos"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Tres"
+      }, "Servicio Tres")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 2:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 2:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         value: this.state.serviceService2,
-        className: "form-control col-md-6",
         onChange: this.handleService2Change
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Uno"
+      }, "Servicio Uno"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Dos"
+      }, "Servicio Dos"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Tres"
+      }, "Servicio Tres")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 3:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Service 3:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         value: this.state.serviceService3,
-        className: "form-control col-md-6",
         onChange: this.handleService3Change
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Uno"
+      }, "Servicio Uno"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Dos"
+      }, "Servicio Dos"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "Servicio Tres"
+      }, "Servicio Tres")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceBody,
+        className: "form-control col-md-6",
+        onChange: this.handleBodyChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "App2"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Content Image:"), $imageMidPreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
@@ -75375,6 +75490,16 @@ function (_Component) {
         name: "avatar2",
         onChange: this.imageChangedHandler
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Body Second Part:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        value: this.state.serviceBody2,
+        className: "form-control col-md-6",
+        onChange: this.handleBody2Change
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"

@@ -7,7 +7,9 @@ class CreateService extends Component {
   constructor(props){
     super(props);
     this.state = {serviceTitle: '', 
-                  serviceBody: '', 
+                  serviceBody: '',
+                  serviceBody2: '',
+                  serviceHighlighted: 'true', 
 
                   serviceImage: '', 
                   serviceMidImage: '',
@@ -21,9 +23,9 @@ class CreateService extends Component {
                   serviceBackground: '', 
                   serviceProduct: '', 
                   serviceClient: '', 
-                  serviceService1: '', 
-                  serviceService2: '', 
-                  serviceService3: '',
+                  serviceService1: 'Servicio Uno', 
+                  serviceService2: 'Servicio Uno', 
+                  serviceService3: 'Servicio Uno',
                   serviceDescription: '',
                   serviceDuration: '', 
 
@@ -52,11 +54,14 @@ class CreateService extends Component {
                   dataGallery3:'',
                   dataGallery4:'',
                   dataGallery5:''
+
                 };
 
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleHighlightedChange = this.handleHighlightedChange.bind(this);
     this.handleBodyChange = this.handleBodyChange.bind(this);
+    this.handleBody2Change = this.handleBody2Change.bind(this);
     this.handleBackgroundChange = this.handleBackgroundChange.bind(this);
     this.handleProductChange = this.handleProductChange.bind(this);
     this.handleClientChange = this.handleClientChange.bind(this);
@@ -73,16 +78,29 @@ class CreateService extends Component {
     this.galleryChangedHandler4 = this.galleryChangedHandler4.bind(this)
     this.galleryChangedHandler5 = this.galleryChangedHandler5.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this);
+    
 
   }
+
+  
   handleTitleChange(e){
     this.setState({
       serviceTitle: e.target.value
     })
   }
+  handleHighlightedChange(e){
+    this.setState({
+      serviceHighlighted: e.target.value
+    })
+  }
   handleBodyChange(e){
     this.setState({
       serviceBody: e.target.value
+    })
+  }
+  handleBody2Change(e){
+    this.setState({
+      serviceBody2: e.target.value
     })
   }
   handleBackgroundChange(e){
@@ -339,11 +357,14 @@ galleryChangedHandler5 (e) {
         serviceGalleryImage5: respoGallery5.data
       })                    
                        }).catch(err=> console.log(err));
+
+                       console.log(this.state)
                         
     let serviceData = await axios.post('api/services/add', 
                   {
                     title:this.state.serviceTitle,
                     body:this.state.serviceBody,
+                    body2:this.state.serviceBody2,
                     background:this.state.serviceBackground,
                     product:this.state.serviceProduct,
                     client:this.state.serviceClient,
@@ -352,6 +373,7 @@ galleryChangedHandler5 (e) {
                     service3:this.state.serviceService3,
                     description:this.state.serviceDescription,
                     duration:this.state.serviceDuration,
+                    highlighted:this.state.serviceHighlighted,
                     image:this.state.serviceImage,
                     midimage:this.state.serviceMidImage,
                     imagegallery1:this.state.serviceGalleryImage1,
@@ -435,11 +457,18 @@ galleryChangedHandler5 (e) {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label>Body:</label>
-                  <textarea className="form-control col-md-6" onChange={this.handleBodyChange}></textarea>
+                  <label>Es servicio destacado?</label>
+                        <div>
+                          <select value={this.state.serviceHighlighted} 
+                          onChange={this.handleHighlightedChange}>
+                              <option value="true">Si</option>
+                              <option value="false">No</option>
+                            </select>
+                       </div>
                 </div>
               </div>
             </div>
+            <br />
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
@@ -464,11 +493,21 @@ galleryChangedHandler5 (e) {
                 </div>
               </div>
             </div>
+
+            
+          
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Service:</label>
-                  <textarea className="form-control col-md-6" onChange={this.handleService1Change}></textarea>
+                        <div>
+                          <select value={this.state.serviceService1} 
+                          onChange={this.handleService1Change}>
+                              <option value="Servicio Uno">Servicio Uno</option>
+                              <option value="Servicio Dos">Servicio Dos</option>
+                              <option value="Servicio Tres">Servicio Tres</option>
+                            </select>
+                       </div>
                 </div>
               </div>
             </div>
@@ -476,7 +515,14 @@ galleryChangedHandler5 (e) {
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Service 2:</label>
-                  <textarea className="form-control col-md-6" onChange={this.handleService2Change}></textarea>
+                    <div>
+                          <select value={this.state.serviceService2} 
+                          onChange={this.handleService2Change}>
+                              <option value="Servicio Uno">Servicio Uno</option>
+                              <option value="Servicio Dos">Servicio Dos</option>
+                              <option value="Servicio Tres">Servicio Tres</option>
+                            </select>
+                    </div>
                 </div>
               </div>
             </div>
@@ -484,7 +530,22 @@ galleryChangedHandler5 (e) {
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Service 3:</label>
-                  <textarea className="form-control col-md-6" onChange={this.handleService3Change}></textarea>
+                      <div>
+                          <select value={this.state.serviceService3} 
+                          onChange={this.handleService3Change}>
+                              <option value="Servicio Uno">Servicio Uno</option>
+                              <option value="Servicio Dos">Servicio Dos</option>
+                              <option value="Servicio Tres">Servicio Tres</option>
+                            </select>
+                       </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Body:</label>
+                  <textarea className="form-control col-md-6" onChange={this.handleBodyChange}></textarea>
                 </div>
               </div>
             </div>
@@ -493,6 +554,14 @@ galleryChangedHandler5 (e) {
               <input type="file" name="avatar2" onChange={this.imageChangedHandler} />
             </div> 
             <br />
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Body Second Part:</label>
+                  <textarea className="form-control col-md-6" onChange={this.handleBody2Change}></textarea>
+                </div>
+              </div>
+            </div>
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
