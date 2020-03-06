@@ -73770,6 +73770,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CreateService).call(this, props));
     _this.state = {
       serviceTitle: '',
+      serviceTitleColor: 'dark',
       serviceBody: '',
       serviceBody2: '',
       serviceHighlighted: 'true',
@@ -73781,7 +73782,7 @@ function (_Component) {
       serviceGalleryImage4: '',
       serviceGalleryImage5: '',
       serviceBackground: '',
-      serviceProduct: '',
+      serviceProduct: 'web',
       serviceClient: '',
       serviceService1: 'Servicio Uno',
       serviceService2: 'Servicio Uno',
@@ -73811,6 +73812,7 @@ function (_Component) {
       dataGallery5: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
+    _this.handleTitleColorChange = _this.handleTitleColorChange.bind(_assertThisInitialized(_this));
     _this.handleHighlightedChange = _this.handleHighlightedChange.bind(_assertThisInitialized(_this));
     _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
     _this.handleBody2Change = _this.handleBody2Change.bind(_assertThisInitialized(_this));
@@ -73838,6 +73840,13 @@ function (_Component) {
     value: function handleTitleChange(e) {
       this.setState({
         serviceTitle: e.target.value
+      });
+    }
+  }, {
+    key: "handleTitleColorChange",
+    value: function handleTitleColorChange(e) {
+      this.setState({
+        serviceTitleColor: e.target.value
       });
     }
   }, {
@@ -73925,15 +73934,16 @@ function (_Component) {
       this.setState({
         selectedFile: event.target.files[0]
       });
+      var files = e.target.files || e.dataTransfer.files;
       var reader = new FileReader();
 
-      reader.onloadend = function () {
+      reader.onload = function (e) {
         _this2.setState({
           imagePreviewUrl: reader.result
         });
       };
 
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(files[0]);
       var datafile = new FormData();
       datafile.append('image', event.target.files[0], event.target.files[0].name);
       this.setState({
@@ -74096,6 +74106,9 @@ function (_Component) {
               e.preventDefault();
               _context.next = 4;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services', this.state.data, settings).then(function (res) {
+                console.log(res);
+                console.log(res.data);
+
                 _this9.setState({
                   serviceImage: res.data
                 });
@@ -74175,6 +74188,7 @@ function (_Component) {
               _context.next = 26;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.post('api/services/add', {
                 title: this.state.serviceTitle,
+                titlecolor: this.state.serviceTitleColor,
                 body: this.state.serviceBody,
                 body2: this.state.serviceBody2,
                 background: this.state.serviceBackground,
@@ -74325,6 +74339,19 @@ function (_Component) {
         className: "form-control",
         onChange: this.handleTitleChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Title color:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceTitleColor,
+        onChange: this.handleTitleColorChange
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "light"
+      }, "Claro"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "dark"
+      }, "Oscuro")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "App"
       }, $imagePreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "file",
@@ -74358,10 +74385,16 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Product:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-        className: "form-control col-md-6",
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Product:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceProduct,
         onChange: this.handleProductChange
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "web"
+      }, "Desarrollo Web"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "app"
+      }, "App"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "other"
+      }, "Otro")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"
@@ -74743,6 +74776,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UpdateService).call(this, props));
     _this.state = {
       serviceTitle: '',
+      serviceTitleColor: '',
       serviceBody: '',
       serviceBody2: '',
       serviceHighlighted: '',
@@ -74784,6 +74818,7 @@ function (_Component) {
       dataGallery5: ''
     };
     _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_this));
+    _this.handleTitleColorChange = _this.handleTitleColorChange.bind(_assertThisInitialized(_this));
     _this.handleHighlightedChange = _this.handleHighlightedChange.bind(_assertThisInitialized(_this));
     _this.handleBodyChange = _this.handleBodyChange.bind(_assertThisInitialized(_this));
     _this.handleBody2Change = _this.handleBody2Change.bind(_assertThisInitialized(_this));
@@ -74815,6 +74850,7 @@ function (_Component) {
       axios.get("/api/services/".concat(this.props.match.params.id)).then(function (response) {
         _this2.setState({
           serviceTitle: response.data.title,
+          serviceTitleColor: response.data.titlecolor,
           serviceBody: response.data.body,
           serviceBody2: response.data.body2,
           serviceHighlighted: response.data.highlighted,
@@ -74845,6 +74881,13 @@ function (_Component) {
     value: function handleTitleChange(e) {
       this.setState({
         serviceTitle: e.target.value
+      });
+    }
+  }, {
+    key: "handleTitleColorChange",
+    value: function handleTitleColorChange(e) {
+      this.setState({
+        serviceTitleColor: e.target.value
       });
     }
   }, {
@@ -75090,7 +75133,7 @@ function (_Component) {
     value: function handleSubmit(e) {
       var _this10 = this;
 
-      var settings, bannerImage, midImage, galleryImage1, galleryImage2, galleryImage3, galleryImage4, galleryImage5, wqewqee;
+      var settings, bannerImage, midImage, galleryImage1, galleryImage2, galleryImage3, galleryImage4, galleryImage5, newData;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function handleSubmit$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -75181,6 +75224,7 @@ function (_Component) {
               _context.next = 25;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios.put("/api/services/".concat(this.props.match.params.id, "}"), {
                 title: this.state.serviceTitle,
+                titlecolor: this.state.serviceTitleColor,
                 body: this.state.serviceBody,
                 body2: this.state.serviceBody2,
                 highlighted: this.state.serviceHighlighted,
@@ -75202,6 +75246,7 @@ function (_Component) {
               }).then(function (response) {
                 _this10.setState({
                   title: '',
+                  titlecolor: '',
                   body: '',
                   body2: '',
                   highlighted: '',
@@ -75228,7 +75273,7 @@ function (_Component) {
               }));
 
             case 25:
-              wqewqee = _context.sent;
+              newData = _context.sent;
 
             case 26:
             case "end":
@@ -75380,6 +75425,19 @@ function (_Component) {
         className: "form-control",
         onChange: this.handleTitleChange
       })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Title Color:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+        value: this.state.serviceTitleColor,
+        onChange: this.handleTitleColorChange
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "light"
+      }, "Claro"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "dark"
+      }, "Oscuro")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "App"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Principal Image:"), $imagePreview, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "file",
@@ -75414,11 +75472,16 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Product:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Product:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         value: this.state.serviceProduct,
-        className: "form-control col-md-6",
         onChange: this.handleProductChange
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "web"
+      }, "Desarrollo Web"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "app"
+      }, "App"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        value: "other"
+      }, "Otro")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-6"

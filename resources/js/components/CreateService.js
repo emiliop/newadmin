@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 class CreateService extends Component {
   constructor(props){
     super(props);
-    this.state = {serviceTitle: '', 
+    this.state = {serviceTitle: '',
+                  serviceTitleColor: 'dark', 
                   serviceBody: '',
                   serviceBody2: '',
                   serviceHighlighted: 'true', 
@@ -21,7 +22,7 @@ class CreateService extends Component {
 
 
                   serviceBackground: '', 
-                  serviceProduct: '', 
+                  serviceProduct: 'web', 
                   serviceClient: '', 
                   serviceService1: 'Servicio Uno', 
                   serviceService2: 'Servicio Uno', 
@@ -59,6 +60,7 @@ class CreateService extends Component {
 
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleTitleColorChange = this.handleTitleColorChange.bind(this);
     this.handleHighlightedChange = this.handleHighlightedChange.bind(this);
     this.handleBodyChange = this.handleBodyChange.bind(this);
     this.handleBody2Change = this.handleBody2Change.bind(this);
@@ -86,6 +88,11 @@ class CreateService extends Component {
   handleTitleChange(e){
     this.setState({
       serviceTitle: e.target.value
+    })
+  }
+  handleTitleColorChange(e){
+    this.setState({
+      serviceTitleColor: e.target.value
     })
   }
   handleHighlightedChange(e){
@@ -148,20 +155,23 @@ class CreateService extends Component {
     this.setState({
       selectedFile: event.target.files[0]
     })
+
+    let files = e.target.files || e.dataTransfer.files;
  
     let reader = new FileReader();
      
-    reader.onloadend = () => {
+    reader.onload = (e) => {
       this.setState({
         imagePreviewUrl: reader.result
       });
     }
  
-    reader.readAsDataURL(event.target.files[0])
+    reader.readAsDataURL(files[0])
 
     
     let datafile = new FormData();
     datafile.append('image', event.target.files[0], event.target.files[0].name)
+    
     this.setState({
       data: datafile
     })
@@ -305,12 +315,16 @@ galleryChangedHandler5 (e) {
 
   async handleSubmit (e) {
 
+    
+
     let settings = { headers: { 'content-type': 'multipart/form-data' } }
 
     e.preventDefault();
     
     let bannerImage = await axios.post('api/services', this.state.data, settings)
     .then( res => {
+      console.log(res)
+      console.log(res.data)
       this.setState({
         serviceImage: res.data
       })                                              
@@ -363,6 +377,7 @@ galleryChangedHandler5 (e) {
     let serviceData = await axios.post('api/services/add', 
                   {
                     title:this.state.serviceTitle,
+                    titlecolor:this.state.serviceTitleColor,
                     body:this.state.serviceBody,
                     body2:this.state.serviceBody2,
                     background:this.state.serviceBackground,
@@ -449,6 +464,20 @@ galleryChangedHandler5 (e) {
                 </div>
               </div>
             </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Title color:</label>
+                        <div>
+                          <select value={this.state.serviceTitleColor} 
+                          onChange={this.handleTitleColorChange}>
+                              <option value="light">Claro</option>
+                              <option value="dark">Oscuro</option>
+                            </select>
+                       </div>
+                </div>
+              </div>
+            </div>
             <div className="App">
               { $imagePreview }
               <input type="file" name="avatar" onChange={this.fileChangedHandler} />
@@ -481,7 +510,14 @@ galleryChangedHandler5 (e) {
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Product:</label>
-                  <textarea className="form-control col-md-6" onChange={this.handleProductChange}></textarea>
+                  <div>
+                          <select value={this.state.serviceProduct} 
+                          onChange={this.handleProductChange}>
+                                  <option value="web">Desarrollo Web</option>
+                                  <option value="app">App</option>
+                                  <option value="other">Otro</option>
+                            </select>
+                       </div>
                 </div>
               </div>
             </div>

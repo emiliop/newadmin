@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 class UpdateService extends Component {
   constructor(props){
     super(props);
-    this.state = {serviceTitle: '', 
+    this.state = {serviceTitle: '',
+                  serviceTitleColor: '',
                   serviceBody: '',
                   serviceBody2: '',
                   serviceHighlighted: '',
@@ -58,6 +59,7 @@ class UpdateService extends Component {
 
 
                 this.handleTitleChange = this.handleTitleChange.bind(this);
+                this.handleTitleColorChange = this.handleTitleColorChange.bind(this);
                 this.handleHighlightedChange = this.handleHighlightedChange.bind(this);
                 this.handleBodyChange = this.handleBodyChange.bind(this);
                 this.handleBody2Change = this.handleBody2Change.bind(this);
@@ -87,6 +89,7 @@ class UpdateService extends Component {
     .then(response => {
       this.setState({ 
         serviceTitle: response.data.title,
+        serviceTitleColor: response.data.titlecolor,
         serviceBody: response.data.body,
         serviceBody2: response.data.body2,
         serviceHighlighted: response.data.highlighted,
@@ -116,6 +119,11 @@ class UpdateService extends Component {
   handleTitleChange(e){
     this.setState({
       serviceTitle: e.target.value
+    })
+  }
+  handleTitleColorChange(e){
+    this.setState({
+      serviceTitleColor: e.target.value
     })
   }
   handleHighlightedChange(e){
@@ -388,9 +396,10 @@ galleryChangedHandler5 (e) {
       })                    
                        }).catch(err=> console.log(err));
 
-    let wqewqee = await axios.put(`/api/services/${this.props.match.params.id}}`, 
+    let newData = await axios.put(`/api/services/${this.props.match.params.id}}`, 
                   {
                     title: this.state.serviceTitle,
+                    titlecolor: this.state.serviceTitleColor,
                     body: this.state.serviceBody,
                     body2: this.state.serviceBody2,
                     highlighted: this.state.serviceHighlighted,
@@ -412,6 +421,7 @@ galleryChangedHandler5 (e) {
                   }).then( response => {
                     this.setState({
                       title:'',
+                      titlecolor:'',
                       body:'',
                       body2:'',
                       highlighted:'',
@@ -493,7 +503,20 @@ galleryChangedHandler5 (e) {
               </div>
             </div>
             </div>
-
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Title Color:</label>
+                        <div>
+                          <select value={this.state.serviceTitleColor}
+                          onChange={this.handleTitleColorChange}>
+                              <option value="light">Claro</option>
+                              <option value="dark">Oscuro</option>
+                            </select>
+                       </div>
+                </div>
+              </div>
+            </div>
             <div className="App">
               <div>Principal Image:</div>
               { $imagePreview }
@@ -526,7 +549,14 @@ galleryChangedHandler5 (e) {
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Product:</label>
-                  <textarea  value={this.state.serviceProduct} className="form-control col-md-6" onChange={this.handleProductChange}></textarea>
+                      <div>
+                          <select value={this.state.serviceProduct} 
+                          onChange={this.handleProductChange}>
+                                  <option value="web">Desarrollo Web</option>
+                                  <option value="app">App</option>
+                                  <option value="other">Otro</option>
+                            </select>
+                       </div>
                 </div>
               </div>
             </div>

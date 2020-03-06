@@ -43,8 +43,6 @@ class ServiceController extends Controller
                     
             $image = $bannerImage;
 
-            dump($image);
-
             return $image;
 
     }
@@ -58,9 +56,7 @@ class ServiceController extends Controller
            
             $request->midimage->move(public_path('images'), $midImage);
         
-            $mid = $midImage;  
-
-            dump($mid);
+            $mid = $midImage;
 
             return $mid;
         
@@ -77,9 +73,7 @@ class ServiceController extends Controller
            
             $request->gallery1->move(public_path('images'), $gallery1);
         
-            $galleryImage1 = $gallery1;  
-            
-            dump($galleryImage1);
+            $galleryImage1 = $gallery1; 
 
             return $galleryImage1;
         
@@ -95,9 +89,7 @@ class ServiceController extends Controller
            
             $request->gallery2->move(public_path('images'), $gallery2);
         
-            $galleryImage2 = $gallery2;  
-            
-            dump($galleryImage2);
+            $galleryImage2 = $gallery2; 
 
             return $galleryImage2;
         
@@ -113,9 +105,7 @@ class ServiceController extends Controller
            
             $request->gallery3->move(public_path('images'), $gallery3);
         
-            $galleryImage3 = $gallery3;  
-            
-            dump($galleryImage3);
+            $galleryImage3 = $gallery3; 
 
             return $galleryImage3;
         
@@ -131,9 +121,7 @@ class ServiceController extends Controller
            
             $request->gallery4->move(public_path('images'), $gallery4);
         
-            $galleryImage4 = $gallery4;  
-            
-            dump($galleryImage4);
+            $galleryImage4 = $gallery4; 
 
             return $galleryImage4;
         
@@ -150,8 +138,6 @@ class ServiceController extends Controller
             $request->gallery5->move(public_path('images'), $gallery5);
         
             $galleryImage5 = $gallery5;  
-            
-            dump($galleryImage5);
 
             return $galleryImage5;
         
@@ -163,10 +149,9 @@ class ServiceController extends Controller
 
         // $image = image::show_image();
 
-         dump($request);
-
         $service = new Service([
             'title' => $request->get('title'),
+            'titlecolor' => $request->get('titlecolor'),
             'body' => $request->get('body'),
             'body2' => $request->get('body2'),
             'highlighted' => $request->get('highlighted'),
